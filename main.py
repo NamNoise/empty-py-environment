@@ -13,6 +13,10 @@ dungeon.link_cave(grotto, "west")
 dungeon.link_cave(cavern, "north")
 cavern.link_cave(dungeon, "south")
 grotto.link_cave(dungeon, "east")
+harry = Enemy("Harry", 'A smelly Wumpus')
+harry.set_conversation("Hangry...Hangrry")
+harry.set_weakness("vegemite")
+dungeon.set_character(harry)
 
 current_cave = cavern
 dead = False
@@ -38,3 +42,8 @@ while dead == False:
             if inhabitant.fight(fight_with) == True:
                 print("Bravo, hero you won the fight!")
                 current_cave.set_character(None)
+            else:
+                print("Scurry home, you lost the fight.")
+        else:
+            print("There is no one here to fight with")
+

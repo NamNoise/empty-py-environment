@@ -10,6 +10,7 @@ harry.talk()
 # Set a weakness
 harry.set_weakness("vegemite")
 
+from character import Enemy
 # Fight with harry
 print("What will you fight with?")
 fight_with = input()
