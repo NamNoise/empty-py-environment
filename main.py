@@ -13,10 +13,24 @@ dungeon.link_cave(grotto, "west")
 dungeon.link_cave(cavern, "north")
 cavern.link_cave(dungeon, "south")
 grotto.link_cave(dungeon, "east")
+
 harry = Enemy("Harry", 'A smelly Wumpus')
 harry.set_conversation("Hangry...Hangrry")
 harry.set_weakness("vegemite")
 dungeon.set_character(harry)
+
+josephine = Friend("Josephine", "A friendly bat")
+josephine.set_conversation("Gidday.")
+grotto.set_character(josephine)
+
+vegemite = Item("vegemite")
+vegemite.set_description("A Wumpuses worst nightmare")
+grotto.set_item(vegemite)
+
+torch = Item("torch")
+torch.set_description("A light for the end of the tunnel")
+dungeon.set_item(torch)
+bag = []
 
 current_cave = cavern
 dead = False
@@ -39,11 +53,34 @@ while dead == False:
 
             print("What will you fight with?")
             fight_with = input()
-            if inhabitant.fight(fight_with) == True:
-                print("Bravo, hero you won the fight!")
-                current_cave.set_character(None)
-            else:
-                print("Scurry home, you lost the fight.")
+            if fight_with in bag:
+                if inhabitant.fight(fight_with) == True:
+                    print("Bravo, hero you won the fight!")
+                    current_cave.set_character(None)
+                    if Enemy.enemies_to_defeat == 0:
+                        print("Congratulations, you have survived another adventure!")
+                        dead = True
+                else:
+                    print("Scurry home, you lost the fight.")
+                    print("That's the end of the game")
         else:
             print("There is no one here to fight with")
 
+    elif command == "pat":
+        if inhabitant is not None:
+            if isinstance(inhabitant, Enemy):
+                print("I wouldn't do that if I were you...")
+            else:
+                inhabitant.pat()
+        else:
+            print("There is no one here to pat:(") ")
+    elif command == "take":
+        if item is not None:
+            print("You put the " + item.get_name() + " in your bag")
+            bag.append(item.get_name())
+            current_cave.set_item(None)
+
+while dead == False:
+    item = current_cave.get_item()
+    if item is not None:
+        item.describe

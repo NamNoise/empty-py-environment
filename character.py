@@ -33,3 +33,13 @@ class Enemy(Character):
         else:
             print(self.name + "swallows you, little wimp")
             return False
+
+class Friend(Character):
+    def __init__(self, char_name, char_description):
+
+        super().__init__(char_name, char_description)
+        self.feeling = None
+
+    def pat(self):
+        print(self.name + " pats you back!")
+        
