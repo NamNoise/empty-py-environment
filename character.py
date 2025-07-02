@@ -34,6 +34,9 @@ class Enemy(Character):
             print(self.name + "swallows you, little wimp")
             return False
 
+    def steal(self):
+        print("You steal from ", + self.name)
+
 class Friend(Character):
     def __init__(self, char_name, char_description):
 
@@ -42,4 +45,3 @@ class Friend(Character):
 
     def pat(self):
         print(self.name + " pats you back!")
-        
